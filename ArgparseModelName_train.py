@@ -127,7 +127,7 @@ import argparse
 
 def main():
     parser = argparse.ArgumentParser(description='Process some integers.')
-    parser.add_argument('model_name', type=str, help='name of model to get from torchvision')
+    parser.add_argument('--model_name', type=str, help='name of model to get from torchvision')
     args = parser.parse_args()
 
     dm = ImageClassifierModule(batch_size=32, data_dir=data_dir)
