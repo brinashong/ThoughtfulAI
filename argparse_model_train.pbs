@@ -2,7 +2,7 @@
 
 MODEL_NAME = "resnet34"
 
-#PBS -N $MODEL_NAME
+#PBS -N resnet34
 #PBS -q normal
 #PBS -l select=1:ncpus=8:mem=64G:ngpus=1
 #PBS -l walltime=12:00:00
