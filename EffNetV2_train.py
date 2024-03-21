@@ -6,12 +6,13 @@ from torch import nn
 from torch.utils.data import random_split, DataLoader
 from torchmetrics import Accuracy
 from torchvision import transforms, datasets
+from torchvision import models
 import wandb
 torch.set_float32_matmul_precision("medium")
-data_dir = './all/'
+data_dir = '/home/users/nus/e0008091/scratch/ThoughtfulAI/data/'
 data_transforms = {
     'train': transforms.Compose([
-        transforms.RandomResizedCrop(224),
+        transforms.RandomResizedCrop(224, scale=(0.8, 1.0)),
         transforms.RandomHorizontalFlip(),
         transforms.ToTensor(),
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
@@ -25,31 +26,14 @@ data_transforms = {
 }
 image_datasets = {x: datasets.ImageFolder(os.path.join(data_dir, x), data_transforms[x])
                   for x in ['train', 'test']}
-dataloaders = {x: torch.utils.data.DataLoader(image_datasets[x], batch_size=32,
-                                             shuffle=True, num_workers=4)
-              for x in ['train', 'test']}
 class_names = image_datasets['train'].classes
 class ImageClassifierModule(pl.LightningDataModule):
-    def __init__(self, batch_size, data_dir: str = './all/'):
+    def __init__(self, batch_size, data_dir: str = './'):
         super().__init__()
         self.data_dir = data_dir
         self.batch_size = batch_size
-        self.transform = {
-            'train': transforms.Compose([
-                transforms.RandomResizedCrop(224),
-                transforms.RandomHorizontalFlip(),
-                transforms.ToTensor(),
-                transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
-            ]),
-            'test': transforms.Compose([
-                transforms.Resize(256),
-                transforms.CenterCrop(224),
-                transforms.ToTensor(),
-                transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
-            ]),
-        }
-        self.image_datasets = {x: datasets.ImageFolder(os.path.join(data_dir, x), data_transforms[x])
-                  for x in ['train', 'test']}
+        self.transform = data_transforms
+        self.image_datasets = image_datasets
         self.class_names = image_datasets['train'].classes
         self.num_classes = len(class_names)
         set_train_full = self.image_datasets['train']
@@ -77,7 +61,6 @@ class ImagePredictionLogger(pl.callbacks.Callback):
                                                  preds[:self.num_samples],
                                                  val_labels[:self.num_samples])]
             })
-from torchvision import models
 class LitModel(pl.LightningModule):
     def __init__(self, input_shape, num_classes, learning_rate=2e-4, transfer=True):
         super().__init__()
@@ -135,7 +118,7 @@ class LitModel(pl.LightningModule):
         optimizer = torch.optim.Adam(self.parameters(), lr=self.learning_rate)
         return optimizer
 
-dm = ImageClassifierModule(batch_size=32, data_dir="./all/")
+dm = ImageClassifierModule(batch_size=32, data_dir=data_dir)
 val_samples = next(iter(dm.val_dataloader()))
 model = LitModel((3, 224, 224), dm.num_classes, learning_rate=2e-4, transfer=True)
 wandb_logger = WandbLogger(project='Retail Image Classification', job_type='train')
