@@ -1,0 +1,13 @@
+#!/bin/bash
+
+MODEL_NAME = "resnet34"
+
+#PBS -N $MODEL_NAME
+#PBS -q normal
+#PBS -l select=1:ncpus=8:mem=64G:ngpus=1
+#PBS -l walltime=12:00:00
+#PBS -P Personal
+#PBS -o out-run-argparse.txt
+#PBS -e errors-argparse.txt
+
+python /home/users/nus/e0008091/scratch/ThoughtfulAI/ArgparseModelName_train.py --model_name=$MODEL_NAME
