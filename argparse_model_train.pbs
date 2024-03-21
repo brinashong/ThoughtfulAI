@@ -1,7 +1,5 @@
 #!/bin/bash
 
-MODEL_NAME = "resnet34"
-
 #PBS -N resnet34
 #PBS -q normal
 #PBS -l select=1:ncpus=8:mem=64G:ngpus=1
@@ -10,4 +8,5 @@ MODEL_NAME = "resnet34"
 #PBS -o out-run-argparse.txt
 #PBS -e errors-argparse.txt
 
-python /home/users/nus/e0008091/scratch/ThoughtfulAI/ArgparseModelName_train.py --model_name=$MODEL_NAME
+python /home/users/nus/e0008091/scratch/ThoughtfulAI/ArgparseModelName_train.py \
+    --model_name=resnet34
