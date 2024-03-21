@@ -124,6 +124,7 @@ class LitModel(pl.LightningModule):
 
 
 import argparse
+from datetime import datetime
 
 def main():
     parser = argparse.ArgumentParser(description='Process some integers.')
@@ -133,7 +134,8 @@ def main():
     dm = ImageClassifierModule(batch_size=32, data_dir=data_dir)
     val_samples = next(iter(dm.val_dataloader()))
     model = LitModel((3, 224, 224), dm.num_classes, learning_rate=2e-4, transfer=True, model_name=args.model_name)
-    accelerator.init_trackers("Retail Image Classification 80 Percent Crop", config={}, init_kwargs={"wandb":{"name":args.model_name}})
+    timenow = datetime.now()
+    accelerator.init_trackers("Retail Image Classification 80 Percent Crop", config={}, init_kwargs={"wandb":{"name":args.model_name+"_"+str(timenow)}})
     wandb_logger = WandbLogger(project='Retail Image Classification 80 Percent Crop', job_type='train', log_model="all")
     early_stop_callback = pl.callbacks.EarlyStopping(monitor="val/loss")
     checkpoint_callback = pl.callbacks.ModelCheckpoint(dirpath="./checkpoints/", save_top_k=1, monitor="val/loss")
