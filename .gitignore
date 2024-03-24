@@ -2,3 +2,5 @@ dataset/
 small_dataset/
 large_dataset/
 wandb/
+.ipynb_checkpoints/
+Retail Image Classification/
