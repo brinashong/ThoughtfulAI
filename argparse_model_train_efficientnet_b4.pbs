@@ -1,0 +1,11 @@
+#!/bin/bash
+
+#PBS -N efficientnet_b4
+#PBS -q normal
+#PBS -l select=1:ncpus=8:mem=64G:ngpus=1
+#PBS -l walltime=4:00:00
+#PBS -P Personal
+#PBS -o out-run-argparse.txt
+#PBS -e errors-argparse.txt
+
+python /home/users/nus/e0008091/scratch/ThoughtfulAI/ArgparseModelName_train.py --model_name=efficientnet_b4
