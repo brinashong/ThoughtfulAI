@@ -3,7 +3,7 @@
 ## Project Overview
 ThoughtfulAI is aimed at automating machine learning operations in the retail sector, enhancing customer experiences, and operational efficiencies through advanced ML techniques such as few-shot learning, contrastive learning, and vision-language modeling. The project includes a series of Jupyter notebooks that demonstrate the development and evaluation of these methods using the RP2K dataset for retail product recognition.
 
-![Alt text](NewProcessOverview.png))
+![Alt text](NewProcessOverview.png)
 
 ## Installation
 To set up this project locally, clone the repository and install the required dependencies:
@@ -16,6 +16,7 @@ pip install -r requirements.txt
 
 ## RP2K Dataset
 You can find the dataset at the RP2K project page https://www.pinlandata.com/rp2k_dataset/
+
 Alternatively, the dataset can be downloaded directly from the link provided by the RP2K authors https://blob-nips2020-rp2k-dataset.obs.cn-east-3.myhuaweicloud.com/rp2k_dataset.zip
 
 ## Usage
