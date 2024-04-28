@@ -1,0 +1,13 @@
+matplotlib
+numpy
+pandas
+pickle
+pytorch-lightning
+seaborn
+torch
+torchvision
+tqdm
+wandb
+transformers
+easyfsl
+torchmetrics
