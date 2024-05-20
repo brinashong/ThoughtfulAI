@@ -25,11 +25,11 @@ The project is structured into different components, each contained in a separat
 
 **Classification_Model_Benchmarking/*.ipynb**: Preprocessing of data and running of finetuning for the architecture which is to be tested  
 
-**SimCLR.ipynb**: Implementation of contrastive learning to handle and cluster new unknown products.
+**Contrastive_Learning/SimCLR.ipynb**: Implementation of contrastive learning to handle and cluster new unknown products.
 
-**QwenVL.ipynb**: Utilization of a vision-language model for zero-shot learning in product identification.
+**Vision_Language_Model_Captioning/QwenVL.ipynb**: Utilization of a vision-language model for zero-shot learning in product identification.
 
-**ProtoNet.ipynb**: Application of few-shot learning for quick adaptation to new products.
+**Few_Shot_Learning/ProtoNet.ipynb**: Application of few-shot learning for quick adaptation to new products.
 
 ## Note on Computational Resources
 This project involves computationally intensive models. It is recommended to use a system with a capable GPU to expedite training and inference.
